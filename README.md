@@ -65,13 +65,5 @@ Open `chatbot.html` in a web browser to interact with the chatbot.
 
 ---
 
-### Troubleshooting
-- If you encounter a missing module error, reinstall dependencies:  
-  ```bash
-  pip install -r requirements.txt
-  ```
-- Ensure Ollama is installed and running properly.
-- If changes are made to the documentation, rerun `populate_database.py`.
 
-Let me know if you need further assistance! 🚀
 
