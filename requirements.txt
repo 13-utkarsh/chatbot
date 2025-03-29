@@ -1,0 +1,11 @@
+flask
+flask-cors
+argparse
+langchain-community
+langchain-text-splitters
+langchain-core
+groq
+nltk
+unstructured
+chromadb
+markdown
