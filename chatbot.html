@@ -12,47 +12,72 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #f4f4f4;
+            background-color: #eef1f6;
+            margin: 0;
         }
         .chat-container {
-            width: 300px;
+            width: 350px;
             max-width: 90%;
             background: white;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
         }
         .messages {
-            height: 300px;
+            height: 350px;
             overflow-y: auto;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 2px solid #ddd;
             padding-bottom: 10px;
             margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
         }
         .message {
-            padding: 8px;
+            padding: 10px;
             margin: 5px 0;
-            border-radius: 5px;
+            border-radius: 8px;
+            max-width: 80%;
+            word-wrap: break-word;
         }
         .user {
             background: #007bff;
             color: white;
-            text-align: right;
+            align-self: flex-end;
         }
         .bot {
-            background: #e0e0e0;
+            background: #f1f1f1;
+            align-self: flex-start;
         }
-        input, button {
-            padding: 8px;
-            margin: 5px;
-            width: calc(100% - 20px);
+        input {
+            padding: 10px;
+            width: calc(100% - 22px);
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline: none;
+            font-size: 14px;
+        }
+        button {
+            padding: 10px;
+            width: 100%;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #0056b3;
         }
     </style>
 </head>
 <body>
     <div class="chat-container">
         <div class="messages" id="messages"></div>
-        <input type="text" id="query" placeholder="Type your message...">
+        <input type="text" id="query" placeholder="Type your message..." onkeypress="handleKeyPress(event)"><br>
         <button onclick="sendMessage()">Send</button>
     </div>
 
@@ -75,12 +100,7 @@
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ query: queryText })
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
                 const botMessage = document.createElement("div");
                 botMessage.className = "message bot";
@@ -89,6 +109,12 @@
                 messagesDiv.scrollTop = messagesDiv.scrollHeight;
             })
             .catch(error => console.error("Error:", error));
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
         }
     </script>
 </body>
