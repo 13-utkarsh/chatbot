@@ -8,19 +8,13 @@ from langchain.memory import ConversationBufferMemory
 CHROMA_PATH = "chroma"
 
 PROMPT_TEMPLATE = """
-You are an AI assistant with memory. Use the previous conversation history and the new question to provide a response.
+Answer the question strictly based only on the following context:
 
-Previous conversation:
-{history}
-
-Context from retrieved documents:
 {context}
 
 ---
 
-Answer the question based on the above context and history.
-
-Question: {question}
+Answer the question strictly based on the above context. Don't give any reply out of context: {question}
 """
 
 # Initialize Groq client
